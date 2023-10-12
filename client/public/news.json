@@ -1,140 +1,150 @@
 [
   {
+    "id": 1,
     "news": {
-      "image": "news1.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Politics",
-      "header": "Government Announces New Policy",
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "header": "বাংলাদেশের ওপর যুক্তরাষ্ট্রের কূটনৈতিক চাপের গোমর ফাঁস করলেন ভারতীয় সাংবাদিক",
+      "body": "জাতীয় নির্বাচন সামনে রেখে গণতন্ত্র ও মানবাধিকার সুরক্ষার নামে যুক্তরাষ্ট্র বাংলাদেশের ওপর যে নজিরবিহীন কূটনৈতিক চাপ অব্যাহত রেখেছে; তার নেপথ্যের গোপন এজেন্ডা ফাঁস করে দিয়েছেন ভারতীয় সাংবাদিক সুবীর ভৌমিক।তিনি জানিয়েছেন, ইন্দো-প্রশান্ত মহাসাগরীয় অঞ্চলে চীনের আধিপত্য খর্ব করার সাম্প্রতিকতম চেষ্টার অংশ হিসেবে বাংলাদেশকে নিয়ে ভয়ংকর খেলায় মেতেছে প্রেসিডেন্ট জো বাইডেনের প্রশাসন। সুবীর ভৌমিক বিবিসি ও রয়টার্সের সাবেক সংবাদদাতা। গত ৮ অক্টোবর ভারতীয় সংবাদমাধ্যম ন্যাশনাল হেরাল্ডের অনলাইন সংস্করণে 'আই অন চায়না, প্রেসার অন বাংলাদেশ: আমেরিকাস লেটেস্ট গ্রেট গেম ইন দ্য ইস্ট' শিরোনামে এক নিবন্ধে বাংলাদেশের ওপর মার্কিন চাপের অন্তর্নিহিত কারণগুলোকে তুলে ধরেছেন তিনি।ভৌমিক তার নিবন্ধে ইন্দো-প্রশান্ত মহাসাগরীয় অঞ্চলে চীনের ক্রমবর্ধমান প্রভাবকে চ্যালেঞ্জ করার চলমান প্রচেষ্টার অংশ হিসেবে যুক্তরাষ্ট্র কিভাবে বাংলাদেশের ওপর তার কূটনৈতিক চাপ বাড়াচ্ছে তা নিবিড়ভাবে নিরীক্ষণ করেছেন।",
       "tags": ["policy", "government", "announcement"]
     },
     "reporter": {
-      "image": "reporter1.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "John Doe",
       "position": "Senior Political Correspondent"
     }
   },
   {
+    "id": 2,
     "news": {
-      "image": "news2.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Technology",
       "header": "New Breakthrough in Artificial Intelligence",
-      "body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "tags": ["AI", "technology", "innovation"]
     },
     "reporter": {
-      "image": "reporter2.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "Jane Smith",
       "position": "Technology Reporter"
     }
   },
   {
+    "id": 3,
     "news": {
-      "image": "news3.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Entertainment",
       "header": "Hollywood Star Wins Prestigious Award",
-      "body": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..",
       "tags": ["celebrity", "award", "entertainment"]
     },
     "reporter": {
-      "image": "reporter3.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "Chris Anderson",
       "position": "Entertainment Correspondent"
     }
   },
   {
+    "id": 4,
     "news": {
-      "image": "news4.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Sports",
       "header": "Team Triumphs in Championship Final",
-      "body": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "tags": ["sports", "championship", "victory"]
     },
     "reporter": {
-      "image": "reporter4.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "Sarah Johnson",
       "position": "Sports Journalist"
     }
   },
   {
+    "id": 5,
     "news": {
-      "image": "news5.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Business",
       "header": "Global Company Reports Record Profits",
-      "body": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "tags": ["business", "profits", "global"]
     },
     "reporter": {
-      "image": "reporter5.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "Michael Brown",
       "position": "Business Analyst"
     }
   },
   {
+    "id": 6,
     "news": {
-      "image": "news6.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Science",
       "header": "Scientists Make Groundbreaking Discovery",
-      "body": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "tags": ["science", "discovery", "research"]
     },
     "reporter": {
-      "image": "reporter6.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "Emily Clark",
       "position": "Science Correspondent"
     }
   },
   {
+    "id": 7,
     "news": {
-      "image": "news7.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Health",
       "header": "New Treatment Shows Promise in Fighting Disease",
-      "body": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "tags": ["health", "treatment", "disease"]
     },
     "reporter": {
-      "image": "reporter7.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "David Martinez",
       "position": "Health Reporter"
     }
   },
   {
+    "id": 8,
     "news": {
-      "image": "news8.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Environment",
       "header": "Initiative Aims to Combat Climate Change",
-      "body": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "tags": ["environment", "climate change", "initiative"]
     },
     "reporter": {
-      "image": "reporter8.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "Olivia White",
       "position": "Environmental Correspondent"
     }
   },
   {
+    "id": 9,
     "news": {
-      "image": "news9.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Travel",
       "header": "Exotic Destination Named Top Travel Spot",
-      "body": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "tags": ["travel", "destination", "adventure"]
     },
     "reporter": {
-      "image": "reporter9.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "Daniel Kim",
       "position": "Travel Journalist"
     }
   },
   {
+    "id": 10,
     "news": {
-      "image": "news10.jpg",
+      "image": "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
       "category": "Education",
       "header": "Education Reform Bill Passes in Parliament",
-      "body": "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit.",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "tags": ["education", "reform", "parliament"]
     },
     "reporter": {
-      "image": "reporter10.jpg",
+      "image": "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
       "name": "Sophie Miller",
       "position": "Education Correspondent"
     }

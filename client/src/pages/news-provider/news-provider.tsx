@@ -1,7 +1,15 @@
 import React, { createContext, useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
+import {
+  useQuery,
+  QueryClient,
+  QueryClientProvider,
+  RefetchOptions,
+  RefetchQueryFilters,
+  QueryObserverResult,
+} from "@tanstack/react-query";
 
 interface NewsData {
+  id: number;
   news: {
     image: string;
     category: string;
@@ -15,18 +23,32 @@ interface NewsData {
     position: string;
   };
 }
+
 interface NewsProviderProps {
   children: React.ReactNode;
 }
 
-const NewsContext = createContext<NewsData[]>([]);
+interface NewsContextValue {
+  data: NewsData[];
+  refetch: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<any, unknown>>;
+}
+
+const NewsContext = createContext<NewsContextValue | undefined>(undefined);
 
 export const useNewsContext = () => {
-  return useContext(NewsContext);
+  const context = useContext(NewsContext);
+  if (!context) {
+    throw new Error("useNewsContext must be used within a NewsProvider");
+  }
+  return context;
 };
 
-export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
-  const { data, isLoading, isError } = useQuery(["news"], fetchData);
+const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
+  const queryClient = new QueryClient();
+
+  const { data, isLoading, isError, refetch } = useQuery(["news"], fetchData);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -36,7 +58,15 @@ export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
     return <p>Error loading news data</p>;
   }
 
-  return <NewsContext.Provider value={data}>{children}</NewsContext.Provider>;
+  const contextValue: NewsContextValue = { data, refetch };
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <NewsContext.Provider value={contextValue}>
+        {children}
+      </NewsContext.Provider>
+    </QueryClientProvider>
+  );
 };
 
 const fetchData = async () => {
@@ -44,3 +74,5 @@ const fetchData = async () => {
   const data = await response.json();
   return data;
 };
+
+export default NewsProvider;
