@@ -1,0 +1,142 @@
+[
+  {
+    "news": {
+      "image": "news1.jpg",
+      "category": "Politics",
+      "header": "Government Announces New Policy",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "tags": ["policy", "government", "announcement"]
+    },
+    "reporter": {
+      "image": "reporter1.jpg",
+      "name": "John Doe",
+      "position": "Senior Political Correspondent"
+    }
+  },
+  {
+    "news": {
+      "image": "news2.jpg",
+      "category": "Technology",
+      "header": "New Breakthrough in Artificial Intelligence",
+      "body": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "tags": ["AI", "technology", "innovation"]
+    },
+    "reporter": {
+      "image": "reporter2.jpg",
+      "name": "Jane Smith",
+      "position": "Technology Reporter"
+    }
+  },
+  {
+    "news": {
+      "image": "news3.jpg",
+      "category": "Entertainment",
+      "header": "Hollywood Star Wins Prestigious Award",
+      "body": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "tags": ["celebrity", "award", "entertainment"]
+    },
+    "reporter": {
+      "image": "reporter3.jpg",
+      "name": "Chris Anderson",
+      "position": "Entertainment Correspondent"
+    }
+  },
+  {
+    "news": {
+      "image": "news4.jpg",
+      "category": "Sports",
+      "header": "Team Triumphs in Championship Final",
+      "body": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "tags": ["sports", "championship", "victory"]
+    },
+    "reporter": {
+      "image": "reporter4.jpg",
+      "name": "Sarah Johnson",
+      "position": "Sports Journalist"
+    }
+  },
+  {
+    "news": {
+      "image": "news5.jpg",
+      "category": "Business",
+      "header": "Global Company Reports Record Profits",
+      "body": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "tags": ["business", "profits", "global"]
+    },
+    "reporter": {
+      "image": "reporter5.jpg",
+      "name": "Michael Brown",
+      "position": "Business Analyst"
+    }
+  },
+  {
+    "news": {
+      "image": "news6.jpg",
+      "category": "Science",
+      "header": "Scientists Make Groundbreaking Discovery",
+      "body": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.",
+      "tags": ["science", "discovery", "research"]
+    },
+    "reporter": {
+      "image": "reporter6.jpg",
+      "name": "Emily Clark",
+      "position": "Science Correspondent"
+    }
+  },
+  {
+    "news": {
+      "image": "news7.jpg",
+      "category": "Health",
+      "header": "New Treatment Shows Promise in Fighting Disease",
+      "body": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+      "tags": ["health", "treatment", "disease"]
+    },
+    "reporter": {
+      "image": "reporter7.jpg",
+      "name": "David Martinez",
+      "position": "Health Reporter"
+    }
+  },
+  {
+    "news": {
+      "image": "news8.jpg",
+      "category": "Environment",
+      "header": "Initiative Aims to Combat Climate Change",
+      "body": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      "tags": ["environment", "climate change", "initiative"]
+    },
+    "reporter": {
+      "image": "reporter8.jpg",
+      "name": "Olivia White",
+      "position": "Environmental Correspondent"
+    }
+  },
+  {
+    "news": {
+      "image": "news9.jpg",
+      "category": "Travel",
+      "header": "Exotic Destination Named Top Travel Spot",
+      "body": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.",
+      "tags": ["travel", "destination", "adventure"]
+    },
+    "reporter": {
+      "image": "reporter9.jpg",
+      "name": "Daniel Kim",
+      "position": "Travel Journalist"
+    }
+  },
+  {
+    "news": {
+      "image": "news10.jpg",
+      "category": "Education",
+      "header": "Education Reform Bill Passes in Parliament",
+      "body": "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit.",
+      "tags": ["education", "reform", "parliament"]
+    },
+    "reporter": {
+      "image": "reporter10.jpg",
+      "name": "Sophie Miller",
+      "position": "Education Correspondent"
+    }
+  }
+]
