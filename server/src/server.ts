@@ -3,7 +3,12 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
-import { getReports } from "./controllers/reportControllers";
+import {
+  deleteReport,
+  getReports,
+  sendReports,
+  updateReport,
+} from "./controllers/reportControllers";
 
 dotenv.config();
 const app = express();
@@ -18,13 +23,16 @@ app.get("/api", (req: Request, res: Response) => {
 });
 
 app.get("/api/reports", getReports);
+app.post("/api/reports", sendReports);
+app.delete("/api/reports/:id", deleteReport);
+app.patch("/api/reports/:id", updateReport);
 
 mongoose
   .connect(process.env.FROM || "the-update")
   .then(() => {
     app.listen(port, () => {
       console.log(
-        `database connected and check on server http://localhost:${port}`
+        `database connected and check on server http://localhost:${port}/api/`
       );
     });
   })
