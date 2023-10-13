@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-query";
 
 interface NewsData {
-  id: number;
+  _id: number;
   news: {
     image: string;
     category: string;
@@ -70,7 +70,8 @@ const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
 };
 
 const fetchData = async () => {
-  const response = await fetch("/news.json");
+  const response = await fetch("http://localhost:8080/api/reports");
+  // const response = await fetch("/news.json");
   const data = await response.json();
   return data;
 };

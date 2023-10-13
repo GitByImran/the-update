@@ -13,7 +13,8 @@ const AllNews = () => {
       <div className="grid grid-cols-12 gap-5">
         {newsData.map((item, index) => (
           <Link
-            href={`/news/${item.id}`}
+            href="/news/[newsId]"
+            as={`/news/${item._id}`}
             key={index}
             className="col-span-12 md:col-span-4 sm:col-span-6 border relative rounded-xl overflow-hidden"
           >

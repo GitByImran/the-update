@@ -12,7 +12,7 @@ const NewsDetail = () => {
   const { data: newsData } = useNewsContext();
 
   const selectedItem = newsData.find(
-    (item) => String(item.id) === String(newsId)
+    (item) => String(item._id) === String(newsId)
   );
 
   if (!selectedItem) {
@@ -24,7 +24,7 @@ const NewsDetail = () => {
         <div className="col-span-12 lg:col-span-8 border p-5">
           <div className="flex items-center justify-between">
             <div className="reporter-info flex items-center gap-3">
-              <div className="h-16 w-16 bg-gray-300 overflow-hidden rounded-full">
+              {/* <div className="h-16 w-16 bg-gray-300 overflow-hidden rounded-full">
                 <Image
                   src={selectedItem.reporter.image}
                   alt=""
@@ -32,7 +32,7 @@ const NewsDetail = () => {
                   width={100}
                   className="h-full w-full object-cover object-top"
                 />
-              </div>
+              </div> */}
               <div className="">
                 <h2 className="text-2xl font-semibold text-blue-500">
                   {selectedItem.reporter.name}
@@ -71,7 +71,7 @@ const NewsDetail = () => {
             {newsData.slice(0, 3).map((item, index) => (
               <Link
                 className="basis-full border p-2 relative hover:bg-gray-100"
-                href={`/news/${item.id}`}
+                href={`/news/${item._id}`}
                 key={index}
                 passHref
               >
