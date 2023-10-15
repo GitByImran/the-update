@@ -137,7 +137,7 @@ const ReportForm: React.FC<ReportFormProps> = () => {
   };
 
   return (
-    <div className="w-10/12 mx-auto">
+    <div className="w-12/12 mx-auto">
       <h2>Report Form</h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">

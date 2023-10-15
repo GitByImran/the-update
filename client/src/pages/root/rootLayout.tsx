@@ -1,12 +1,16 @@
 import React from "react";
 import Home from "../routes/home";
 import AllNews from "../news/all-news";
+import Navbar from "../shared-components/navbar";
+import Footer from "../shared-components/footer";
 
 const RootLayout = () => {
   return (
-    <div className="w-10/12 mx-auto">
-      <Home />
-      <AllNews />
+    <div className="">
+      <Navbar />
+      {/* <Home />
+      <AllNews /> */}
+      <Footer />
     </div>
   );
 };

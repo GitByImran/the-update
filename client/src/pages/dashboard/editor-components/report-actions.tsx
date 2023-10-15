@@ -67,7 +67,7 @@ const ReportActions: React.FC = () => {
   };
 
   return (
-    <div className="w-10/12 mx-auto relative">
+    <div className="w-12/12 mx-auto relative">
       <h2>report actions </h2>
       <div className="grid grid-cols-12 gap-5">
         {newsData.map((item, index) => (
