@@ -8,7 +8,7 @@ const AllNews = () => {
   const { data: newsData } = useNewsContext();
 
   return (
-    <div>
+    <div className="">
       <h2 className="text-center my-5 text-3xl">All News</h2>
       <div className="grid grid-cols-12 gap-5">
         {newsData.map((item, index) => (
