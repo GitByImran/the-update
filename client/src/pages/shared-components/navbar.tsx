@@ -30,7 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
             isScrolled ? "gap-5 py-5" : "gap-5 py-5"
           }`}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between main-navbar w-full">
             <div>
               <div className="logo">
                 <h2 className="uppercase text-3xl font-extrabold text-blue-500 tracking-wider">
@@ -51,7 +51,6 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
               <Search isScrolled={isScrolled} />
             </div>
           </div>
-
           {/* <Categories isScrolled={isScrolled} /> */}
         </nav>
       </div>

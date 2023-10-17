@@ -10,6 +10,7 @@ import {
 
 interface NewsData {
   _id: number;
+  reportTime: string;
   news: {
     image: string;
     category: string;
@@ -33,6 +34,7 @@ interface NewsContextValue {
   refetch: <TPageData>(
     options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
   ) => Promise<QueryObserverResult<any, unknown>>;
+  isLoading: boolean;
 }
 
 const NewsContext = createContext<NewsContextValue | undefined>(undefined);
@@ -58,7 +60,7 @@ const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
     return <p>Error loading news data</p>;
   }
 
-  const contextValue: NewsContextValue = { data, refetch };
+  const contextValue: NewsContextValue = { data, refetch, isLoading };
 
   return (
     <QueryClientProvider client={queryClient}>

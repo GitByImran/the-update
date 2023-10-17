@@ -1,6 +1,10 @@
+import { BsLink } from "react-icons/bs";
+import { BiChevronDownCircle } from "react-icons/bi";
+import { AiOutlineDown } from "react-icons/ai";
 import { CgChevronDown, CgChevronUp } from "react-icons/cg";
 import Link from "next/link";
 import React, { useState } from "react";
+import AuthConnector from "@/pages/components/auth/auth-connector";
 
 interface CategoriesType {
   label: string;
@@ -23,12 +27,20 @@ const Categories: React.FC = () => {
   //   setSeeMore(!seeMore);
   // };
   return (
-    <div className="">
-      <h2 className="my-5">Select categories : </h2>
-      <ul className="flex flex-col gap-2">
+    <div className="my-5">
+      <h2 className="mb-5 text-lg text-gray-500 flex items-center justify-between gap-2 w-full">
+        <span>Select categories </span>
+        <span className="mt-1">
+          <BiChevronDownCircle />
+        </span>
+      </h2>
+      <ul className="flex flex-col flex-wrap gap-2">
         {categories.slice(0, 7).map((item, index) => (
           <li key={index}>
-            <Link className="capitalize" href={item.link}>
+            <Link
+              className="capitalize text-lg hover:bg-blue-500 hover:text-white hover:px-5 hover:py-2 rounded"
+              href={item.link}
+            >
               {item.label}
             </Link>
           </li>
@@ -50,14 +62,15 @@ const Categories: React.FC = () => {
                   key={index}
                   className="px-5 py-2 rounded-lg hover:bg-blue-500 text-black hover:text-white delay-0 transition-all"
                 >
-                  {item.label}
+                {item.label}
                 </Link>
               ))
               <p className="w-max text-black">no more categories</p>
             )}
-          </div>
-        </li> */}
+            </div>
+          </li> */}
       </ul>
+      <AuthConnector />
     </div>
   );
 };

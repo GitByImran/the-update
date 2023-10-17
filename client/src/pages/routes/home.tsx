@@ -5,18 +5,22 @@ import React from "react";
 const Home: React.FC = () => {
   return (
     <div>
-      <main className="">
-        <div className="relative h-full w-full">
+      <main
+        className="relative"
+        style={{ minHeight: "600px", overflow: "hidden" }}
+      >
+        <div className="">
           <Image
             src="https://i.ibb.co/yFSBLyH/pexels-kobe-1516440.jpg"
             alt=""
-            height={300}
-            width={500}
-            className="h-screen w-full object-cover"
+            height={1000}
+            width={1000}
+            className="w-full object-cover"
+            style={{ height: "600px" }}
           />
         </div>
         <div
-          className="absolute top-0 h-screen w-full flex flex-col justify-center"
+          className="absolute top-0 h-full w-full flex flex-col justify-center"
           style={{ background: "rgba(0,0,0,.75)" }}
         >
           <div className="px-20 text-white">

@@ -33,7 +33,7 @@ const AllNews = () => {
                   {item.news.body}
                 </p>
                 <Link
-                  href="#"
+                  href=""
                   className="w-fit flex items-center gap-1 text-gray-500 hover:text-blue-500 hover:font-bold absolute bottom-5 right-5"
                 >
                   Read more <BiRightArrowAlt />

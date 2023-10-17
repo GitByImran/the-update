@@ -7,3 +7,9 @@
 body {
   font-family: "Exo 2", sans-serif;
 }
+
+.body-content,
+.main-navbar {
+  max-width: 1440px;
+  margin: 0 auto;
+}
