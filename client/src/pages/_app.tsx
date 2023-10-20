@@ -5,6 +5,7 @@ import NewsProvider from "./news-provider/news-provider";
 import Navbar from "./shared-components/navbar";
 import Footer from "./shared-components/footer";
 import { useEffect, useState } from "react";
+import AuthProvider from "./auth-provider/auth-provider";
 
 const client = new QueryClient();
 
@@ -24,10 +25,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={client}>
-      <NewsProvider>
-        <Navbar isScrolled={isScrolled} />
-        <Component {...pageProps} />
-      </NewsProvider>
+      <AuthProvider>
+        <NewsProvider>
+          <Navbar isScrolled={isScrolled} />
+          <Component {...pageProps} />
+        </NewsProvider>
+      </AuthProvider>
       <Footer />
     </QueryClientProvider>
   );

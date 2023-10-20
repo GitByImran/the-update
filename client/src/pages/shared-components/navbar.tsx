@@ -2,12 +2,13 @@ import { BiLogInCircle } from "react-icons/bi";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { RxDashboard } from "react-icons/rx";
 import { IoIosTimer } from "react-icons/io";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import Search from "./nav-contents/search";
 import Categories from "./nav-contents/categories";
 import DashCategories from "../dashboard/dash-categories";
 import Link from "next/link";
+import { UseAuthContext } from "../auth-provider/auth-provider";
 
 interface NavbarProps {
   isScrolled: boolean;
@@ -16,6 +17,7 @@ interface NavbarProps {
 enum ActiveView {
   Home = "Home",
   Dashboard = "Dashboard",
+  Login = "login",
 }
 
 const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
@@ -24,6 +26,8 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
   );
 
   const [activeView, setActiveView] = useState<ActiveView>(ActiveView.Home);
+
+  const { user, handleSignOut } = UseAuthContext();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -90,20 +94,32 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
               </span>
               Dashboard
             </Link>
-            <Link
-              href="/dashboard"
-              className={`text-lg flex items-center gap-2 py-1 hover:border-b-4 hover:border-blue-500 ${
-                activeView === ActiveView.Dashboard
-                  ? "border-b-4 border-blue-500"
-                  : ""
-              }`}
-              onClick={() => handleViewChange(ActiveView.Dashboard)}
-            >
-              <span className="mt-1">
-                <BiLogInCircle />
-              </span>
-              Log In
-            </Link>
+            {user ? (
+              <button
+                onClick={handleSignOut}
+                className="text-lg flex items-center gap-2 py-1 hover:border-b-4 hover:border-blue-500"
+              >
+                <span className="mt-1">
+                  <BiLogInCircle />
+                </span>
+                Logout
+              </button>
+            ) : (
+              <Link
+                href="/components/auth/login"
+                className={`text-lg flex items-center gap-2 py-1 hover:border-b-4 hover:border-blue-500 ${
+                  activeView === ActiveView.Login
+                    ? "border-b-4 border-blue-500"
+                    : ""
+                }`}
+                onClick={() => handleViewChange(ActiveView.Login)}
+              >
+                <span className="mt-1">
+                  <BiLogInCircle />
+                </span>
+                Log In
+              </Link>
+            )}
           </div>
 
           <div>
