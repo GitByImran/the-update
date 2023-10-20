@@ -58,14 +58,14 @@ const InternationalNews: React.FC = () => {
           </h2>
           <div className="my-5 flex flex-col items-start gap-2">
             <p
-              className=""
+              className="text-lg"
               style={{
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 whiteSpace: "pre-wrap",
               }}
             >
-              {truncateText(latestInternationalNews.news.body, 300)}
+              {truncateText(latestInternationalNews.news.body, 500)}
             </p>
             <Link
               href="/news/[newsId]"

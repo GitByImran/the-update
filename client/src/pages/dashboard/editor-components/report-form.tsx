@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 interface ReportFormProps {}
 
@@ -85,6 +86,8 @@ const ReportForm: React.FC<ReportFormProps> = () => {
     }));
   };
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
@@ -130,21 +133,57 @@ const ReportForm: React.FC<ReportFormProps> = () => {
         "http://localhost:8080/api/reports",
         formData
       );
-      console.log("Report submitted successfully:", response.data);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setFormData({
+        news: {
+          image: "",
+          category: "",
+          header: "",
+          body: "",
+          tags: [],
+        },
+        reporter: {
+          image: "",
+          name: "",
+          position: "",
+        },
+      });
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     } catch (error) {
       console.error("Error submitting report:", error);
     }
   };
 
   return (
-    <div className="w-12/12 mx-auto">
-      <h2>Report Form</h2>
+    <div className="body-content py-10 px-5">
+      <h2 className="text-2xl font-semibold mb-10 border-b-4 border-blue-500 w-fit">
+        Report Form
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">
-          <div className="flex gap-2">
-            <label className="text-lg">News Image :</label>
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-            {isUploading && <p className="block ml-2">Uploading...</p>}
+          <div className="flex flex-col gap-2">
+            <div>
+              <label className="text-lg">News Image :</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                ref={fileInputRef}
+                required
+              />
+              {isUploading && <p className="block ml-2">Uploading...</p>}
+            </div>
+            <div className="text-red-500 text-sm">
+              {formData.news.image === "" && "News image is required"}
+            </div>
           </div>
           <div className="flex flex-col gap-2 w-fit">
             <label className="text-lg">Category:</label>
@@ -153,6 +192,7 @@ const ReportForm: React.FC<ReportFormProps> = () => {
               value={formData.news.category}
               onChange={handleCategoryChange}
               className="px-5 py-2 border"
+              required={true}
             >
               <option value="">Select Category</option>
               <option value="politics">Politics</option>
@@ -163,6 +203,9 @@ const ReportForm: React.FC<ReportFormProps> = () => {
               <option value="business">Business</option>
               <option value="technology">Technology</option>
             </select>
+            {formData.news.category === "" && (
+              <div className="text-red-500 text-sm">Category is required</div>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-lg">Header:</label>
@@ -172,7 +215,11 @@ const ReportForm: React.FC<ReportFormProps> = () => {
               value={formData.news.header}
               onChange={handleInputChange}
               className="border-2 rounded-md p-2 outline-blue-500"
+              required
             />
+            <div className="text-red-500 text-sm">
+              {formData.news.header === "" && "Header is required"}
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-lg">Body:</label>
@@ -181,7 +228,11 @@ const ReportForm: React.FC<ReportFormProps> = () => {
               value={formData.news.body}
               onChange={handleInputChange}
               className="border-2 rounded-md p-2 outline-blue-500"
+              required
             />
+            <div className="text-red-500 text-sm">
+              {formData.news.body === "" && "Body is required"}
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-lg">
@@ -196,7 +247,11 @@ const ReportForm: React.FC<ReportFormProps> = () => {
               value={formData.news.tags}
               onChange={handleTagChange}
               className="border-2 rounded-md p-2 outline-blue-500"
+              required
             />
+            <div className="text-red-500 text-sm">
+              {formData.news.tags.length === 0 && "Tags is required"}
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-lg">Reporter Image:</label>
@@ -211,7 +266,11 @@ const ReportForm: React.FC<ReportFormProps> = () => {
                 })
               }
               className="border-2 rounded-md p-2 outline-blue-500"
+              required
             />
+            <div className="text-red-500 text-sm">
+              {formData.reporter.image === "" && "Image is required"}
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-lg">Reporter Name:</label>
@@ -226,7 +285,11 @@ const ReportForm: React.FC<ReportFormProps> = () => {
                 })
               }
               className="border-2 rounded-md p-2 outline-blue-500"
+              required
             />
+            <div className="text-red-500 text-sm">
+              {formData.reporter.name === "" && "Name is required"}
+            </div>
           </div>
           <div className="flex flex-col gap-2 w-fit">
             <label className="text-lg">Reporter Position:</label>
@@ -235,16 +298,33 @@ const ReportForm: React.FC<ReportFormProps> = () => {
               value={formData.reporter.position}
               onChange={handleReporterPositionChange}
               className="px-5 py-2 border"
+              required
             >
-              <option value="">Select Position</option>
+              <option value="" disabled>
+                Select Position
+              </option>
               <option value="Admin">Admin</option>
               <option value="Moderator">Moderator</option>
               <option value="Editor">Editor</option>
             </select>
+            {formData.reporter.position === "" && (
+              <div className="text-red-500 text-sm">Position is required</div>
+            )}
           </div>
           <button
             type="submit"
-            className="w-fit bg-blue-500 px-10 py-2 text-lg text-white font-semibold my-5"
+            className="w-fit bg-blue-500 px-10 py-2 text-lg text-white font-semibold my-5 cursor-pointer rounded"
+            disabled={
+              isUploading ||
+              !formData.news.image ||
+              !formData.news.category ||
+              !formData.news.header ||
+              !formData.news.body ||
+              formData.news.tags.length === 0 ||
+              !formData.reporter.image ||
+              !formData.reporter.name ||
+              !formData.reporter.position
+            }
           >
             Submit
           </button>

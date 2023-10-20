@@ -67,8 +67,10 @@ const ReportActions: React.FC = () => {
   };
 
   return (
-    <div className="w-12/12 mx-auto relative">
-      <h2>report actions </h2>
+    <div className="body-content py-10 px-5">
+      <h2 className="text-2xl font-semibold mb-10 border-b-4 border-blue-500 w-fit">
+        Create actions
+      </h2>
       <div className="grid grid-cols-12 gap-5">
         {newsData.map((item, index) => (
           <div key={index} className="col-span-4 p-5 border">

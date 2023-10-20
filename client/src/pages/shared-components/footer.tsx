@@ -7,7 +7,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <div>
+    <div className="body-content">
       <div className="my-10">
         {/*  */}
         <div className="flex justify-between w-full py-10">

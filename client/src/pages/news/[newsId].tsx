@@ -1,15 +1,51 @@
-import { BiRightArrowAlt } from "react-icons/bi";
+import { BiArrowBack, BiRightArrowAlt } from "react-icons/bi";
 import { BsFillClockFill } from "react-icons/bs";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { useNewsContext } from "../news-provider/news-provider";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 
 const NewsDetail = () => {
   const router = useRouter();
   const { newsId } = router.query;
   const { data: newsData } = useNewsContext();
+
+  const filteredNews = useMemo(() => {
+    if (!newsData || !newsId) {
+      return [];
+    }
+
+    const selectedCategory = newsData.find(
+      (item) => String(item._id) === String(newsId)
+    )?.news.category;
+
+    if (!selectedCategory) {
+      return [];
+    }
+
+    const filteredNews = newsData
+      .filter((item) => {
+        const currentNewsId = Array.isArray(newsId) ? newsId[0] : newsId;
+
+        return (
+          item.news.category === selectedCategory &&
+          String(item._id) !== String(currentNewsId)
+        );
+      })
+
+      .sort(
+        (a, b) =>
+          new Date(b.reportTime).getTime() - new Date(a.reportTime).getTime()
+      );
+
+    return filteredNews;
+  }, [newsData, newsId]);
+
+  if (!newsData || !newsId) {
+    return <p>Loading...</p>;
+  }
 
   const selectedItem = newsData.find(
     (item) => String(item._id) === String(newsId)
@@ -18,9 +54,13 @@ const NewsDetail = () => {
   if (!selectedItem) {
     return <p>Loading...</p>;
   }
+
+  const goBack = () => {
+    router.back();
+  };
   return (
-    <div className="w-10/12 mx-auto">
-      <div className="grid grid-cols-12 gap-5 my-20">
+    <div className="w-10/12 mx-auto my-20">
+      <div className="grid grid-cols-12 gap-5">
         <div className="col-span-12 lg:col-span-8 border p-5">
           <div className="flex items-center justify-between">
             <div className="reporter-info flex items-center gap-3">
@@ -44,10 +84,11 @@ const NewsDetail = () => {
             </div>
             <div className="reported-time flex flex-col">
               <p className="text-md text-gray-500 flex items-center gap-1">
-                <BsFillClockFill /> 12:00 AM
+                <BsFillClockFill /> {selectedItem.reportTime.split(",")[1]}
               </p>
               <p className="text-md text-gray-500 flex items-center gap-1">
-                <BsFillCalendarCheckFill /> 01-01-2023
+                <BsFillCalendarCheckFill />{" "}
+                {selectedItem.reportTime.split(",")[0]}
               </p>
             </div>
           </div>
@@ -68,7 +109,7 @@ const NewsDetail = () => {
         <div className="col-span-12 lg:col-span-4 border p-5">
           <h2>Most recent</h2>
           <div className="latest-published-news mt-5 flex flex-col lg:flex-col sm:flex-row gap-5 ">
-            {newsData.slice(0, 3).map((item, index) => (
+            {filteredNews.slice(0, 3).map((item, index) => (
               <Link
                 className="basis-full border p-2 relative hover:bg-gray-100"
                 href={`/news/${item._id}`}
@@ -87,6 +128,13 @@ const NewsDetail = () => {
           </div>
         </div>
       </div>
+      <button
+        onClick={goBack}
+        className="bg-blue-500 text-white px-5 py-2 my-10 hover:bg-blue-500 rounded flex items-center w-fit"
+      >
+        <BiArrowBack className="mr-2" />
+        Go Back
+      </button>
     </div>
   );
 };

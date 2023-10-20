@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import moment from "moment";
+import { BiRadioCircleMarked } from "react-icons/bi";
 
 const LatestNews: React.FC = () => {
   const { data: newsData } = useNewsContext();
@@ -39,7 +40,12 @@ const LatestNews: React.FC = () => {
             className="col-span-4 bg-white p-5 border -mt-20 z-10"
             key={item._id}
           >
-            <p className="mb-5">* {getPublishedTimeAgo(item.reportTime)}</p>
+            <p className="mb-5 flex items-center gap-1">
+              <span className="text-blue-500 text-xl">
+                <BiRadioCircleMarked />
+              </span>
+              {getPublishedTimeAgo(item.reportTime)}
+            </p>
             <Image
               src={item.news.image}
               alt={item.news.image}
