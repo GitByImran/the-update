@@ -103,7 +103,7 @@ const ReporterProfile: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="body-content px-5">
       <h2>Reporter Profile</h2>
       <div>
         <div className="w-20">
@@ -112,8 +112,9 @@ const ReporterProfile: React.FC = () => {
               <Image
                 src={imageUrl ? imageUrl : user.photoURL}
                 alt="User Profile"
-                width={100}
-                height={100}
+                width={500}
+                height={500}
+                className="border-2 rounded-full h-full w-full object-cover object-top"
               />
             )}
           </div>
