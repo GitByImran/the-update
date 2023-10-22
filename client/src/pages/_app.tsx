@@ -7,7 +7,7 @@ import Footer from "./shared-components/footer";
 import { useEffect, useState } from "react";
 import AuthProvider from "./auth-provider/auth-provider";
 
-const client = new QueryClient();
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <QueryClientProvider client={client}>
+    <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <NewsProvider>
           <Navbar isScrolled={isScrolled} />

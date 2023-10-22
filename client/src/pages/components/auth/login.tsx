@@ -1,3 +1,5 @@
+import { AiOutlineLock } from "react-icons/ai";
+import { MdVpnKey } from "react-icons/md";
 import { UseAuthContext } from "@/pages/auth-provider/auth-provider";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -26,7 +28,12 @@ const Login: React.FC = () => {
   return (
     <div className="login-page">
       <div className="w-full my-5 flex flex-col justify-center items-center">
-        <h1 className="mb-5 text-2xl font-semibold">Login</h1>
+        <h1 className="mb-5 text-2xl font-semibold flex items-center gap-2 text-gray-700">
+          Login
+          <span>
+            <AiOutlineLock />
+          </span>
+        </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <div className="form-group flex flex-col gap-2 w-fit">
             <label htmlFor="email">Email</label>
@@ -54,11 +61,19 @@ const Login: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="bg-blue-500 px-5 py-2 text-white font-semibold my-2"
+            className="bg-blue-500 px-5 py-2 text-white font-semibold my-2 flex items-center justify-center gap-2"
           >
             Submit
+            <span className="text-xl mt-0.5">
+              <MdVpnKey />
+            </span>
           </button>
-          <Link href="/components/auth/register">Create an account</Link>
+          <Link
+            href="/components/auth/register"
+            className="text-blue-500 border-b-2 border-transparent delay-100 hover:border-blue-500 w-fit"
+          >
+            Create an account
+          </Link>
         </form>
       </div>
     </div>

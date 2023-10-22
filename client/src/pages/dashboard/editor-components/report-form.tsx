@@ -35,8 +35,6 @@ const ReportForm: React.FC<ReportFormProps> = () => {
     },
   });
 
-  const [isUploading, setIsUploading] = useState(false);
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -86,6 +84,7 @@ const ReportForm: React.FC<ReportFormProps> = () => {
     }));
   };
 
+  const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
