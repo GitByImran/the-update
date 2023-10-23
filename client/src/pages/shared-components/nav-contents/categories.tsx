@@ -1,4 +1,4 @@
-import { CgChevronDown, CgChevronUp } from "react-icons/cg";
+import { AiFillCaretDown } from "react-icons/ai";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -20,16 +20,20 @@ const categories: CategoriesType[] = [
 ];
 
 const Categories: React.FC = () => {
-  const [seeMore, setSeeMore] = useState(false);
+  const [showCategory, setShowCategory] = useState<boolean>(false);
   const [activeCategory, setActiveCategory] = useState("");
   const router = useRouter();
 
-  const handleSeeMore = () => {
-    setSeeMore(!seeMore);
+  const handleToggle = () => {
+    setShowCategory(!showCategory);
   };
 
   const handleCategoryClick = (label: string) => {
     setActiveCategory(label);
+  };
+
+  const handleHidecategory = () => {
+    setShowCategory(!showCategory);
   };
 
   useEffect(() => {
@@ -47,14 +51,39 @@ const Categories: React.FC = () => {
 
   return (
     <div className="w-full body-content">
-      <div className="flex  items-center gap-5 py-2">
-        <ul className="flex justify-between gap-2 w-full">
+      <div>
+        <button
+          className="text-lg md:hidden flex items-center justify-center gap-2 w-full"
+          onClick={handleToggle}
+        >
+          {showCategory
+            ? "Hide Categories"
+            : activeCategory
+            ? activeCategory
+            : "Show Categories"}
+          <span
+            className={`text-blue-500 mt-1.5 ${
+              showCategory ? "rotate-180" : "rotate-0"
+            }`}
+          >
+            <AiFillCaretDown />
+          </span>
+        </button>
+      </div>
+      <div className="relative flex items-center gap-5 py-2">
+        <ul
+          className={`${
+            showCategory
+              ? "flex flex-col md:flex-row gap-2 w-fit p-5 md:py-0 md:-mx-4 h-fit absolute md:static top-10 z-10 bg-white rounded-lg md:rounded-none"
+              : "hidden md:flex flex-row w-full"
+          }`}
+        >
           {categories.slice(0, categories.length).map((item, index) => (
-            <li key={index}>
+            <li key={index} onClick={handleHidecategory}>
               <Link
-                className={`capitalize text-lg hover:bg-blue-500 hover:text-white px-5 hover:py-2 ${
+                className={`capitalize text-lg hover:bg-blue-500 rounded hover:text-white px-5 hover:py-2 ${
                   activeCategory === item.label
-                    ? "border-b-4 border-blue-500 py-2"
+                    ? "md:border-b-4 border-blue-500 py-2 rounded-none"
                     : ""
                 }`}
                 href={`/components/${item.link}`}
@@ -71,37 +100,3 @@ const Categories: React.FC = () => {
 };
 
 export default Categories;
-
-/* use if need --------------------------------------------------------------------------->
-
-<li onClick={handleSeeMore} className="relative">
-            <button className="text-lg flex items-center gap-2">
-              See more
-              {seeMore ? <CgChevronUp /> : <CgChevronDown />}
-            </button>
-            <div className="absolute right-0 top-10">
-              <div
-                className={`bg-white text-lg p-5 border  flex flex-col rounded-b-xl ${
-                  !seeMore && "hidden"
-                }`}
-              >
-                {
-                  seeMore &&
-                    categories
-                      .slice(7, categories.length)
-                      .map((item, index) => (
-                        <Link
-                          href={item.link}
-                          key={index}
-                          className="px-5 py-2 rounded-lg hover:bg-blue-500 text-black hover:text-white delay-0 transition-all"
-                        >
-                          {item.label}
-                        </Link>
-                      ))
-                  // <p className="w-max text-black">no more categories</p>
-                }
-              </div>
-            </div>
-          </li>
-
-*/

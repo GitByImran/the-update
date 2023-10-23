@@ -5,12 +5,14 @@ import { useRouter } from "next/router";
 import { useNewsContext } from "../news-provider/news-provider";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { UseAuthContext } from "../auth-provider/auth-provider";
 
 const NewsDetail = () => {
   const router = useRouter();
   const { newsId } = router.query;
   const { data: newsData } = useNewsContext();
+  const { user } = UseAuthContext();
 
   const filteredNews = useMemo(() => {
     if (!newsData || !newsId) {
@@ -135,6 +137,9 @@ const NewsDetail = () => {
         <BiArrowBack className="mr-2" />
         Go Back
       </button>
+      <div>
+        <h2>comments</h2>
+      </div>
     </div>
   );
 };

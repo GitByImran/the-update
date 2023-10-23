@@ -3,6 +3,8 @@ import { FiUserCheck } from "react-icons/fi";
 import { UseAuthContext } from "@/pages/auth-provider/auth-provider";
 import Link from "next/link";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 const Registration: React.FC = () => {
   const { handleSignUp, registerUserToDatabase } = UseAuthContext();
@@ -12,7 +14,7 @@ const Registration: React.FC = () => {
     password: "",
     retypePassword: "",
   });
-
+  const router = useRouter();
   const [passwordMatch, setPasswordMatch] = useState(true);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,20 +37,31 @@ const Registration: React.FC = () => {
       console.log("Passwords do not match");
       return;
     }
-
-    console.log("Submitted Data:", formData);
-
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "User registration successfull!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    router.push("/components/auth/login");
     try {
-      await handleSignUp(formData.email, formData.password, formData.name);
+      await handleSignUp(formData.email, formData.password, formData.name, "");
 
       registerUserToDatabase({
-        displayName: formData.name,
+        name: formData.name,
         email: formData.email,
         image: "",
         role: "user",
-        totalReports: 0,
+        totalReport: 0,
       });
     } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error creating new user!",
+        footer: '<a href="">Why do I have this issue?</a>',
+      });
       console.error("Error signing up:", error);
     }
   };

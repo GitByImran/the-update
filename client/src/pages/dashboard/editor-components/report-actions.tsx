@@ -16,7 +16,6 @@ interface EditModalProps {
 
 const ReportActions: React.FC = () => {
   const { data: newsData, refetch } = useNewsContext();
-
   const [editModalVisible, setEditModalVisible] = useState<boolean>(false);
   const [editedItem, setEditedItem] = useState<any | null>(null);
 
@@ -72,8 +71,11 @@ const ReportActions: React.FC = () => {
         Create actions
       </h2>
       <div className="grid grid-cols-12 gap-5">
-        {newsData.map((item, index) => (
-          <div key={index} className="col-span-4 p-5 border">
+        {newsData?.map((item, index) => (
+          <div
+            key={index}
+            className="col-span-12 sm:col-span-6 md:col-span-4 p-5 border"
+          >
             <div className="flex flex-col gap-2">
               <h2 className="truncate text-xl font-semibold">
                 {item.news.header}

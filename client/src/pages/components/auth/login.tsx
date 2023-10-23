@@ -4,6 +4,7 @@ import { UseAuthContext } from "@/pages/auth-provider/auth-provider";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const Login: React.FC = () => {
   const router = useRouter();
@@ -21,14 +22,14 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submitted Data:", formData);
-    router.push("/");
+
     handleSignIn(formData.email, formData.password);
   };
 
   return (
     <div className="login-page">
-      <div className="w-full my-5 flex flex-col justify-center items-center">
-        <h1 className="mb-5 text-2xl font-semibold flex items-center gap-2 text-gray-700">
+      <div className="w-full my-10 flex flex-col justify-center items-center">
+        <h1 className="mb-10 text-2xl font-semibold flex items-center gap-2 text-gray-700">
           Login
           <span>
             <AiOutlineLock />

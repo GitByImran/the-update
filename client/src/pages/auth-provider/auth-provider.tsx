@@ -10,6 +10,9 @@ import {
 } from "firebase/auth";
 import app from "../../../firebase.config";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 interface User {
   uid: string;
@@ -25,6 +28,9 @@ const auth = getAuth(app);
 
 export const AuthContext = createContext<{
   user: User | null;
+  userList: UserData[] | null;
+  setUserList: React.Dispatch<React.SetStateAction<UserData[] | null>>;
+  refetchUserData: () => Promise<any>;
   handleSignUp: (
     email: string,
     password: string,
@@ -36,9 +42,12 @@ export const AuthContext = createContext<{
   handleImageChange: (file: File) => Promise<string>;
   isUploading: boolean;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
-  registerUserToDatabase: (userData: UserData) => Promise<any>;
+  registerUserToDatabase: (setUserData: SetUserData) => Promise<any>;
 }>({
   user: null,
+  userList: null,
+  setUserList: () => null,
+  refetchUserData: () => Promise.resolve(),
   handleSignUp: () => {},
   handleSignIn: () => {},
   handleSignOut: () => {},
@@ -47,15 +56,24 @@ export const AuthContext = createContext<{
   },
   isUploading: false,
   setUser: () => null,
-  registerUserToDatabase: async (userData: UserData) => {},
+  registerUserToDatabase: async (setUserData: SetUserData) => {},
 });
 
 interface UserData {
-  displayName: string;
+  name: string;
   email: string;
   image: string;
   role: string;
-  totalReports: number;
+  totalReport: number;
+  _id: string;
+}
+
+interface SetUserData {
+  name: string;
+  email: string;
+  image: string;
+  role: string;
+  totalReport: number;
 }
 
 type UserProfile = {
@@ -73,20 +91,38 @@ export const UseAuthContext = () => {
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [userList, setUserList] = useState<UserData[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
+  const router = useRouter();
+
+  const { data: userData, refetch: refetchUserData } = useQuery(
+    ["user-list"],
+    async () => {
+      const response = await axios.get<UserData[]>(
+        "http://localhost:8080/api/users"
+      );
+      return response.data;
+    }
+  );
+
+  useEffect(() => {
+    if (userData) {
+      setUserList(userData);
+    }
+  }, [userData]);
 
   // Send new user data to database
-  const registerUserToDatabase = async (userData: UserData) => {
+  const registerUserToDatabase = async (userData: SetUserData) => {
     const apiUrl = "http://localhost:8080/api/users";
 
     try {
       const response = await axios.post(apiUrl, {
-        name: userData.displayName,
+        name: userData.name,
         email: userData.email,
         image: userData.image,
         role: "user",
-        totalReports: 0,
+        totalReport: 0,
       });
 
       return response.data;
@@ -158,7 +194,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           uid: authUser.uid,
           email: authUser.email || email,
           displayName: name,
-          photoURL: imageUrl, // Set the photoURL property directly
+          photoURL: imageUrl,
         };
 
         setUser(userProperties);
@@ -180,12 +216,25 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           displayName: authUser.displayName || "",
           photoURL: authUser.photoURL || "",
         });
-        console.log(authUser);
         if (authUser) {
-          console.log("user in");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Login successfull!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          console.log(router);
+          router.push("/");
         }
       })
       .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Invalid email/password, try again!",
+        });
         console.error("Error signing in:", error);
       });
   };
@@ -223,6 +272,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const authShare = {
     user,
+    userList,
+    setUserList,
+    refetchUserData,
     handleSignUp,
     handleSignIn,
     handleSignOut,
