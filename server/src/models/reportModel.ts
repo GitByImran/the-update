@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const moment = require("moment");
+const moment = require("moment-timezone");
 
 const reportSchema = new mongoose.Schema({
   news: {
@@ -16,8 +16,20 @@ const reportSchema = new mongoose.Schema({
   },
   reportTime: {
     type: String,
-    default: moment().format("MMMM Do YYYY, h:mm:ss a"),
+    default: moment().tz("Asia/Dhaka").format("MMMM Do YYYY, h:mm:ss a"),
   },
+  comments: [
+    {
+      user: {
+        email: String,
+      },
+      comment: String,
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
 });
 
 const ReportModel = mongoose.model("Reports", reportSchema);

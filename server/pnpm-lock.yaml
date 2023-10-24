@@ -20,6 +20,9 @@ dependencies:
   moment:
     specifier: ^2.29.4
     version: 2.29.4
+  moment-timezone:
+    specifier: ^0.5.43
+    version: 0.5.43
   mongodb:
     specifier: ^6.1.0
     version: 6.1.0
@@ -666,6 +669,12 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
+    dev: false
+
+  /moment-timezone@0.5.43:
+    resolution: {integrity: sha512-72j3aNyuIsDxdF1i7CEgV2FfxM1r6aaqJyLB2vwb33mXYyoyLly+F1zbWqhA3/bVIoJ4szlUoMbUnVdid32NUQ==}
+    dependencies:
+      moment: 2.29.4
     dev: false
 
   /moment@2.29.4:

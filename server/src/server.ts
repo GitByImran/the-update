@@ -9,23 +9,53 @@ import {
   sendReports,
   updateReport,
 } from "./controllers/reportControllers";
+import { getUsers, sendUsers, updateUser } from "./controllers/userControllers";
+import {
+  deleteComment,
+  editComment,
+  getComment,
+  sendComment,
+} from "./controllers/commentControllers";
+
+// config
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8080;
 
+// usage route
+
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
+
+// test route
 
 app.get("/api", (req: Request, res: Response) => {
   res.status(200).json("server responding");
 });
 
+// report routes
+
 app.get("/api/reports", getReports);
 app.post("/api/reports", sendReports);
 app.delete("/api/reports/:id", deleteReport);
 app.patch("/api/reports/:id", updateReport);
+
+// user routes
+
+app.post("/api/users", sendUsers);
+app.get("/api/users", getUsers);
+app.patch("/api/users/:userId", updateUser);
+
+// comment routes
+
+app.post("/api/reports/:id/comments", sendComment);
+app.get("/api/reports/:id/comments", getComment);
+app.delete("/api/reports/:reportId/comments/:commentId", deleteComment);
+app.patch("/api/reports/:reportId/comments/:commentId", editComment);
+
+// build connection to database
 
 mongoose
   .connect(process.env.FROM || "the-update")
@@ -39,31 +69,3 @@ mongoose
   .catch((error) => {
     throw new Error("unable to access database, double check access secrets");
   });
-
-/* 
-const ReportModel = require("./models/reportModel");
-
-const newReport = new ReportModel({
-  news: {
-    image: "https://i.ibb.co/6bLGBVT/israel-palestine.jpg",
-    category: "Politics",
-    header: "Your news header",
-    body: "Your news body",
-    tags: ["tag1", "tag2"],
-  },
-  reporter: {
-    image: "https://i.ibb.co/J3fzD2T/photo-1570612861542-284f4c12e75f.jpg",
-    name: "John Doe",
-    position: "editor",
-  },
-});
-
-newReport
-  .save()
-  .then((savedReport: any) => {
-    console.log("Report saved:", savedReport);
-  })
-  .catch((error: Error) => {
-    console.error("Error saving report:", error);
-  });
- */
