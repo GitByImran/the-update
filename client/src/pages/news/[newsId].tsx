@@ -276,15 +276,19 @@ const NewsDetail: React.FC = () => {
         <div className="col-span-12 lg:col-span-8 border p-5">
           <div className="flex items-center justify-between">
             <div className="reporter-info flex items-center gap-3">
-              {/* <div className="h-16 w-16 bg-gray-300 overflow-hidden rounded-full">
+              <div className="h-12 w-12 bg-gray-300 overflow-hidden rounded-full">
                 <Image
-                  src={selectedItem.reporter.image}
+                  src={
+                    selectedItem.reporter.image.startsWith("https://")
+                      ? selectedItem.reporter.image
+                      : ""
+                  }
                   alt=""
                   height={100}
                   width={100}
                   className="h-full w-full object-cover object-top"
                 />
-              </div> */}
+              </div>
               <div className="">
                 <h2 className="text-2xl font-semibold text-blue-500">
                   {selectedItem.reporter.name}
@@ -305,7 +309,20 @@ const NewsDetail: React.FC = () => {
             </div>
           </div>
           <div className="detailed-news mt-10 flex flex-col gap-5">
-            <h2 className="text-2xl font-semibold">
+            <div className="h-96 w-full bg-gray-300 overflow-hidden">
+              <Image
+                src={
+                  selectedItem.news.image.startsWith("https://")
+                    ? selectedItem.news.image
+                    : ""
+                }
+                alt=""
+                height={1000}
+                width={1000}
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
+            <h2 className="text-2xl font-semibold text-blue-500">
               {selectedItem.news.header}
             </h2>
             <p className="text-lg break-words">{selectedItem.news.body}</p>
@@ -352,7 +369,7 @@ const NewsDetail: React.FC = () => {
           placeholder="Write your comment here..."
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          className="border py-2 px-5 h-20 w-96"
+          className="border py-2 px-5 h-20 w-full sm:w-96 rounded-lg outline-blue-500"
         />
         <div className="flex gap-2">
           <button
@@ -390,12 +407,14 @@ const NewsDetail: React.FC = () => {
                         className="rounded-lg h-12 w-12"
                       />
                       <div>
-                        <div className="min-h-max w-96 border px-5 py-1 rounded-lg">
+                        <div className="min-h-max w-full sm:w-96 border px-5 py-1 rounded-lg">
                           <p>
-                            <span className="capitalize">
+                            <span className="capitalize font-semibold">
                               {matchedUserData[index].name}
                             </span>
-                            ({matchedUserData[index].email})
+                            <span className="ml-2 text-gray-500">
+                              ({matchedUserData[index].email})
+                            </span>
                           </p>
                           {comment._id === commentToEdit ? (
                             <div className="my-5">
@@ -404,7 +423,7 @@ const NewsDetail: React.FC = () => {
                                 onChange={(e) =>
                                   setEditedComment(e.target.value)
                                 }
-                                className="border py-2 px-5 h-20 w-full"
+                                className="border py-2 px-5 h-20 w-full outline-blue-500"
                               />
                               <div className="flex gap-2">
                                 <button
