@@ -226,7 +226,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           });
 
           console.log(router);
-          router.push("/");
+          router.back();
         }
       })
       .catch((error) => {

@@ -64,11 +64,11 @@ const DashCategories: React.FC = () => {
           </span>
         </button>
       </div>
-      <div className="relative flex items-center gap-5 py-2">
+      <div className="relative flex items-center gap-5 py-2 md:justify-start justify-center">
         <ul
           className={`${
             showCategory
-              ? "flex flex-col md:flex-row gap-2 w-fit p-5 md:py-0 md:-mx-4 h-fit absolute md:static top-10 z-10 bg-white rounded-lg md:rounded-none"
+              ? "flex flex-col md:flex-row gap-2 w-fit p-5 md:py-0 md:-mx-4 h-fit absolute md:static top-10 shadow-2xl md:shadow-none border md:border-none z-10 bg-white rounded-lg md:rounded-none"
               : "hidden md:flex flex-row w-full"
           }`}
         >

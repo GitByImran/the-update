@@ -48,6 +48,10 @@ const Search: React.FC<SearchProps> = ({ isScrolled, showRoute }) => {
     }
   };
 
+  const handleHideResult = () => {
+    setSearchQuery("");
+  };
+
   return (
     <div className="relative">
       <div
@@ -69,7 +73,12 @@ const Search: React.FC<SearchProps> = ({ isScrolled, showRoute }) => {
           <CgSearch />
         </button>
       </div>
-      <div className="absolute bg-white w-full mt-5">
+      <div
+        className={`${
+          searchResults.length >= 1 &&
+          "absolute bg-white text-black w-full border shadow-lg p-5 mt-5 z-20"
+        }`}
+      >
         <motion.ul>
           {searchResults.map((result, index) => (
             <motion.li
@@ -77,8 +86,16 @@ const Search: React.FC<SearchProps> = ({ isScrolled, showRoute }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.3 }}
+              className=""
             >
-              <Link href="">{result.news.header}</Link>
+              <Link
+                href="/news/[newsId]"
+                as={`/news/${result._id}`}
+                className="hover:text-blue-500 truncate"
+                onClick={handleHideResult}
+              >
+                {result.news.header}
+              </Link>
             </motion.li>
           ))}
         </motion.ul>

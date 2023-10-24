@@ -23,6 +23,7 @@ interface NewsData {
     name: string;
     position: string;
   };
+  comments: string[];
 }
 
 interface NewsProviderProps {

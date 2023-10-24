@@ -35,10 +35,10 @@ const ContentRender: React.FC = () => {
           <p className="text-2xl">No content in this category.</p>
         </div>
       ) : (
-        <div className="flex flex-col gap-10 my-10">
+        <div className="flex flex-col gap-10 my-10 px-5 md:px-5">
           {filteredNews.map((item, index) => (
-            <div key={index} className="grid grid-cols-12 gap-10">
-              <div className="col-span-4 h-60 w-full overflow-hidden">
+            <div key={index} className="flex flex-col md:flex-row gap-10">
+              <div className="h-60 fill md:w-96 overflow-hidden md:basis-2/6 basis-6/6">
                 <Image
                   src={item.news.image}
                   alt=""
@@ -47,12 +47,12 @@ const ContentRender: React.FC = () => {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="col-span-8">
+              <div className="md:basis-4/6 basis-6/6">
                 <h2 className="text-2xl font-semibold text-blue-500">
                   {item.news.header}
                 </h2>
-                <p className="my-5 text-lg">
-                  {truncateText(item.news.body, 500)}
+                <p className="my-5 text-lg break-normal">
+                  {truncateText(item.news.body, 300)}
                 </p>
                 <Link
                   href={`/news/${item._id}`}

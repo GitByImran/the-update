@@ -103,8 +103,12 @@ const ReporterProfile: React.FC = () => {
   };
 
   return (
-    <div className="body-content px-5">
-      <h2>Reporter Profile</h2>
+    <div className="body-content px-5 py-10">
+      <div className="w-full flex justify-center">
+        <h2 className="text-2xl font-semibold mb-10 border-b-4 border-blue-500 w-fit">
+          Reporter Profile
+        </h2>
+      </div>
       <div>
         <div className="w-20">
           <div className="h-20 w-20 rounded-full overflow-hidden">

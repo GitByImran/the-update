@@ -54,9 +54,11 @@ const ManageUsers = () => {
 
   return (
     <div className="body-content px-5 py-10">
-      <h2 className="text-2xl font-semibold mb-20 border-b-4 border-blue-500 w-fit">
-        Users :{" "}
-      </h2>
+      <div className="w-full flex justify-center">
+        <h2 className="text-2xl font-semibold mb-10 border-b-4 border-blue-500 w-fit">
+          Manage Users
+        </h2>
+      </div>
       <div>
         <div className="grid grid-cols-12 gap-10 my-10">
           {userList?.map((data, index) => (

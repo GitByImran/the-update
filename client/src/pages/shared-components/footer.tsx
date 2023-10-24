@@ -10,12 +10,12 @@ const Footer: React.FC = () => {
     <div className="body-content">
       <div className="my-10">
         {/*  */}
-        <div className="flex justify-between w-full py-10">
-          <div className="flex flex-col items-center basis-1/3 p-5">
+        <div className="flex md:flex-row flex-col items-center justify-between w-full py-10">
+          <div className="flex flex-col items-center basis-1/3 p-5 border-b-2 border-blue-500 w-fit md:border-none">
             <span>Email Us</span>
             <Link href="mailto:the-update@gmail.com">the-update@gmail.com</Link>
           </div>
-          <div className="flex flex-col items-center basis-1/3 p-5 border-r-2 border-l-2 border-blue-500">
+          <div className="flex flex-col items-center basis-1/3 p-5 md:border-r-2 md:border-l-2 border-blue-500">
             <span>Reach Us</span>
             <div className="flex gap-3">
               <Link href="" className="text-3xl text-blue-500">
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
               </Link>
             </div>
           </div>
-          <div className="flex flex-col items-center basis-1/3 p-5">
+          <div className="flex flex-col items-center basis-1/3 border-t-2 border-blue-500 md:border-none p-5">
             <span>Contact Us</span>
             <Link href="texl:+8801234567890">+8801234567890</Link>
           </div>
