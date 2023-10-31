@@ -12,6 +12,7 @@ const reportSchema = new mongoose.Schema({
   reporter: {
     image: String,
     name: String,
+    email: String,
     position: String,
   },
   reportTime: {
