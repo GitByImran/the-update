@@ -1,6 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { UseAuthContext } from "@/pages/auth-provider/auth-provider";
+import Image from "next/image";
 
 interface ReportFormProps {}
 
@@ -15,11 +17,33 @@ interface FormData {
   reporter: {
     image: string;
     name: string;
+    email: string;
     position: string;
   };
 }
 
+interface UserData {
+  name: string;
+  email: string;
+  image: string;
+  role: string;
+  totalReport: number;
+  _id: string;
+}
+
 const ReportForm: React.FC<ReportFormProps> = () => {
+  const { user, userList } = UseAuthContext();
+  const [userData, setUserData] = useState<UserData | undefined>(undefined);
+
+  useEffect(() => {
+    const getUserData = userList?.find(
+      (userData) => userData.email === user?.email
+    );
+    setUserData(getUserData);
+  }, [user, userList]);
+
+  console.log(userData);
+
   const [formData, setFormData] = useState<FormData>({
     news: {
       image: "",
@@ -29,9 +53,10 @@ const ReportForm: React.FC<ReportFormProps> = () => {
       tags: [],
     },
     reporter: {
-      image: "",
-      name: "",
-      position: "",
+      image: userData?.image || "",
+      name: userData?.name || "",
+      email: userData?.email || "",
+      position: userData?.role || "",
     },
   });
 
@@ -67,19 +92,6 @@ const ReportForm: React.FC<ReportFormProps> = () => {
       news: {
         ...prevData.news,
         tags,
-      },
-    }));
-  };
-
-  const handleReporterPositionChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const position = e.target.value;
-    setFormData((prevData) => ({
-      ...prevData,
-      reporter: {
-        ...prevData.reporter,
-        position,
       },
     }));
   };
@@ -128,10 +140,15 @@ const ReportForm: React.FC<ReportFormProps> = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/reports",
-        formData
-      );
+      const response = await axios.post("http://localhost:8080/api/reports", {
+        news: formData.news,
+        reporter: {
+          image: userData?.image,
+          name: userData?.name,
+          email: userData?.email,
+          position: userData?.role,
+        },
+      });
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -148,9 +165,10 @@ const ReportForm: React.FC<ReportFormProps> = () => {
           tags: [],
         },
         reporter: {
-          image: "",
-          name: "",
-          position: "",
+          image: userData?.image || "",
+          name: userData?.name || "",
+          email: userData?.email || "",
+          position: userData?.role || "",
         },
       });
       if (fileInputRef.current) {
@@ -255,62 +273,26 @@ const ReportForm: React.FC<ReportFormProps> = () => {
                 {formData.news.tags.length === 0 && "Tags is required"}
               </div>
             </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-lg">Reporter Image:</label>
-              <input
-                type="text"
-                name="image"
-                value={formData.reporter.image}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    reporter: { ...formData.reporter, image: e.target.value },
-                  })
-                }
-                className="border-2 rounded-md p-2 outline-blue-500"
-                required
-              />
-              <div className="text-red-500 text-sm">
-                {formData.reporter.image === "" && "Image is required"}
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-lg">Reporter Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.reporter.name}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    reporter: { ...formData.reporter, name: e.target.value },
-                  })
-                }
-                className="border-2 rounded-md p-2 outline-blue-500"
-                required
-              />
-              <div className="text-red-500 text-sm">
-                {formData.reporter.name === "" && "Name is required"}
-              </div>
-            </div>
-            <div className="flex flex-col gap-2 w-fit">
-              <label className="text-lg">Reporter Position:</label>
-              <select
-                name="position"
-                value={formData.reporter.position}
-                onChange={handleReporterPositionChange}
-                className="px-5 py-2 border"
-                required
-              >
-                <option value="" disabled>
-                  Select Position
-                </option>
-                <option value="Admin">Admin</option>
-                <option value="Moderator">Moderator</option>
-                <option value="Editor">Editor</option>
-              </select>
-              {formData.reporter.position === "" && (
-                <div className="text-red-500 text-sm">Position is required</div>
+            <div>
+              <h2 className="font-semibold text-gray-700 my-5">
+                Reporting by :{" "}
+              </h2>
+              {userData && (
+                <div className="flex gap-3">
+                  <Image
+                    src={userData.image}
+                    alt="reporter-image"
+                    height={100}
+                    width={100}
+                    className="h-14 w-14 rounded-full border"
+                  ></Image>
+                  <div>
+                    <p className="text-lg font-bold capitalize text-gray-700">
+                      {userData.name}
+                    </p>
+                    <p className="text-gray-700">{userData.role}</p>
+                  </div>
+                </div>
               )}
             </div>
             <button
@@ -322,10 +304,7 @@ const ReportForm: React.FC<ReportFormProps> = () => {
                 !formData.news.category ||
                 !formData.news.header ||
                 !formData.news.body ||
-                formData.news.tags.length === 0 ||
-                !formData.reporter.image ||
-                !formData.reporter.name ||
-                !formData.reporter.position
+                formData.news.tags.length === 0
               }
             >
               Submit

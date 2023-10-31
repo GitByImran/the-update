@@ -16,6 +16,7 @@ const Registration: React.FC = () => {
   });
   const router = useRouter();
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const [strongPassword, setStrongPassword] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -28,6 +29,10 @@ const Registration: React.FC = () => {
         setPasswordMatch(false);
       }
     }
+    if (name === "password") {
+      const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+      setStrongPassword(passwordRegex.test(value));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,6 +42,11 @@ const Registration: React.FC = () => {
       console.log("Passwords do not match");
       return;
     }
+    if (!strongPassword) {
+      console.log("Password does not meet strength requirements");
+      return;
+    }
+
     Swal.fire({
       position: "center",
       icon: "success",
@@ -60,10 +70,13 @@ const Registration: React.FC = () => {
         icon: "error",
         title: "Oops...",
         text: "Error creating new user!",
-        footer: '<a href="">Why do I have this issue?</a>',
       });
       console.error("Error signing up:", error);
     }
+  };
+
+  const handleBackLogin = () => {
+    localStorage.removeItem("prev-path");
   };
 
   return (
@@ -111,6 +124,15 @@ const Registration: React.FC = () => {
               required
               className="border text-lg px-3 py-2 outline-blue-500 border-gray-500 rounded-none"
             />
+            {formData.password !== "" && (
+              <span
+                className={strongPassword ? "text-green-500" : "text-red-500"}
+              >
+                {strongPassword
+                  ? "Password is strong and meets the requirements."
+                  : "Password must contain at least one uppercase letter, one number, one special character, and be at least 8 characters long."}
+              </span>
+            )}
           </div>
           <div className="form-group flex flex-col gap-2 w-full">
             <label htmlFor="retypePassword">Retype Password</label>
@@ -148,6 +170,7 @@ const Registration: React.FC = () => {
           <Link
             href="/components/auth/login"
             className="text-blue-500 border-b-2 border-transparent delay-100 hover:border-blue-500 w-fit"
+            onClick={handleBackLogin}
           >
             Back to Login
           </Link>

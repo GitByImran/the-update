@@ -4,8 +4,43 @@ import React from "react";
 import LatestNews from "../components/home/latest-news";
 import InternationalNews from "../components/home/international-news";
 import SuggestedNews from "../components/home/suggested-news";
+import { useNewsContext } from "../news-provider/news-provider";
 
 const Home: React.FC = () => {
+  const { data: newsData } = useNewsContext();
+
+  // Filter latest news
+  const latestNews = newsData.filter((item) => {
+    const publishedTime = moment(item.reportTime, "MMMM Do YYYY, h:mm:ss a");
+    const currentTime = moment();
+    const diffHours = currentTime.diff(publishedTime, "hours");
+
+    return diffHours <= 24;
+  });
+
+  // Sort the latest news by reportTime in descending order
+  const mostRecentNews = [...latestNews].sort((a, b) =>
+    moment(b.reportTime, "MMMM Do YYYY, h:mm:ss a").diff(
+      moment(a.reportTime, "MMMM Do YYYY, h:mm:ss a")
+    )
+  )[0]; // Select the first item
+
+  const getPublishedTimeAgo = (reportTime: string) => {
+    const publishedTime = moment(reportTime, "MMMM Do YYYY, h:mm:ss a");
+    const currentTime = moment();
+    const diffMinutes = currentTime.diff(publishedTime, "minutes");
+    const diffHours = currentTime.diff(publishedTime, "hours");
+    const diffDays = currentTime.diff(publishedTime, "days");
+
+    if (diffDays > 0) {
+      return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+    } else if (diffHours > 0) {
+      return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+    } else {
+      return `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
+    }
+  };
+
   return (
     <div>
       <main
@@ -18,7 +53,7 @@ const Home: React.FC = () => {
       >
         <div className="">
           <Image
-            src="https://i.ibb.co/yFSBLyH/pexels-kobe-1516440.jpg"
+            src={mostRecentNews ? mostRecentNews.news.image : ""}
             alt=""
             height={1000}
             width={1000}
@@ -31,19 +66,18 @@ const Home: React.FC = () => {
           style={{ background: "rgba(0,0,0,.75)" }}
         >
           <div className="px-20 text-white">
-            <h2 className="text-3xl font-bold mb-5 ">
-              Lorem ipsum dolor sit amet.
+            <h2 className="text-3xl font-bold mb-5">
+              {mostRecentNews ? mostRecentNews.news.header : "No latest news"}
             </h2>
             <p className="max-w-3xl text-lg mb-5 text-gray-300">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel
-              soluta odio voluptatem consectetur atque quaerat. Officia enim
-              placeat iusto? Fugit corporis amet pariatur quo esse dolore harum
-              doloribus recusandae voluptatem sapiente aspernatur quis similique
-              voluptatum ratione tempora, totam unde molestiae quam? Laboriosam
-              mollitia non tenetur, molestiae odit ipsum consectetur voluptatum.
+              {mostRecentNews
+                ? mostRecentNews.news.body
+                : "No content available"}
             </p>
             <p className="text-gray-300">
-              {moment().format("dddd, MMMM Do YYYY, h:mm:ss a")}
+              {mostRecentNews
+                ? getPublishedTimeAgo(mostRecentNews.reportTime)
+                : ""}
             </p>
           </div>
         </div>

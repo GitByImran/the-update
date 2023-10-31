@@ -141,6 +141,22 @@ const NewsDetail: React.FC = () => {
 
   // Handle comment submission
   const handleCommentSubmit = async () => {
+    if (!user) {
+      Swal.fire({
+        text: "You have to login to comment",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Go to login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/components/auth/login");
+        }
+      });
+
+      return;
+    }
     if (!comment.trim()) {
       Swal.fire({
         icon: "error",
@@ -208,6 +224,22 @@ const NewsDetail: React.FC = () => {
 
   // Edit a comment
   const editComment = (commentId: string) => {
+    if (!user) {
+      Swal.fire({
+        text: "You have to login to edit this comment",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Go to login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/components/auth/login");
+        }
+      });
+
+      return;
+    }
     const existingComment = existingComments.find(
       (comment) => comment._id === commentId
     );
@@ -364,6 +396,8 @@ const NewsDetail: React.FC = () => {
         <BiArrowBack className="mr-2" />
         Go Back
       </button>
+
+      {/* comment on news */}
       <div className="flex flex-col items-start gap-5">
         <textarea
           placeholder="Write your comment here..."

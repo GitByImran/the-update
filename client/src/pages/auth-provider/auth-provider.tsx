@@ -13,6 +13,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import { useNewsContext } from "../news-provider/news-provider";
 
 interface User {
   uid: string;
@@ -29,6 +30,7 @@ const auth = getAuth(app);
 export const AuthContext = createContext<{
   user: User | null;
   userList: UserData[] | null;
+  loggedUserdata: UserData | undefined;
   setUserList: React.Dispatch<React.SetStateAction<UserData[] | null>>;
   refetchUserData: () => Promise<any>;
   handleSignUp: (
@@ -46,6 +48,7 @@ export const AuthContext = createContext<{
 }>({
   user: null,
   userList: null,
+  loggedUserdata: undefined,
   setUserList: () => null,
   refetchUserData: () => Promise.resolve(),
   handleSignUp: () => {},
@@ -95,6 +98,17 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const router = useRouter();
+  const [loggedUserdata, setLoggedUserdata] = useState<UserData | undefined>(
+    undefined
+  );
+
+  // get logged in user data
+  useEffect(() => {
+    const getUserData = userList?.find(
+      (userData) => userData.email === user?.email
+    );
+    setLoggedUserdata(getUserData);
+  }, [user, userList]);
 
   const { data: userData, refetch: refetchUserData } = useQuery(
     ["user-list"],
@@ -198,7 +212,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         };
 
         setUser(userProperties);
-
+        localStorage.setItem("prev-path", router.asPath);
         return updateProfile(authUser, userProperties);
       })
       .catch((error) => {
@@ -224,9 +238,13 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             showConfirmButton: false,
             timer: 1500,
           });
-
-          console.log(router);
-          router.back();
+          const previousPath = localStorage.getItem("prev-path");
+          if (previousPath === "/components/auth/register") {
+            router.push("/");
+            localStorage.removeItem("prev-path");
+          } else {
+            router.back();
+          }
         }
       })
       .catch((error) => {
@@ -282,6 +300,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isUploading,
     setUser,
     registerUserToDatabase,
+    loggedUserdata,
   };
 
   return (

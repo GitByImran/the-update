@@ -26,6 +26,10 @@ const Login: React.FC = () => {
     handleSignIn(formData.email, formData.password);
   };
 
+  const handleBackRegister = () => {
+    localStorage.setItem("prev-path", router.asPath);
+  };
+
   return (
     <div className="login-page">
       <div className="w-full my-10 flex flex-col justify-center items-center">
@@ -72,6 +76,7 @@ const Login: React.FC = () => {
           <Link
             href="/components/auth/register"
             className="text-blue-500 border-b-2 border-transparent delay-100 hover:border-blue-500 w-fit"
+            onClick={handleBackRegister}
           >
             Create an account
           </Link>

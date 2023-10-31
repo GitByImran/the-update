@@ -7,6 +7,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import axios from "axios";
 import EditModal from "./report-edit";
+import Swal from "sweetalert2";
 
 interface EditModalProps {
   onClose: () => void;
@@ -26,12 +27,23 @@ const ReportActions: React.FC = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:8080/api/reports/${id}`
-      );
-      console.log(response);
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
 
-      refetch();
+      if (result.isConfirmed) {
+        const response = await axios.delete(
+          `http://localhost:8080/api/reports/${id}`
+        );
+        refetch();
+        Swal.fire("Deleted!", "Report has been deleted.", "success");
+      }
     } catch (error) {
       console.error("Error deleting report:", error);
     }
@@ -59,6 +71,13 @@ const ReportActions: React.FC = () => {
       );
 
       console.log("PATCH Response:", response.data);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your update has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       refetch();
     } catch (error) {
       console.error("Error updating report:", error);
@@ -123,7 +142,7 @@ const ReportActions: React.FC = () => {
       </div>
       {editModalVisible && (
         <div
-          className="absolute top-0 left-0 h-screen w-full flex justify-center items-center"
+          className="fixed top-0 left-0 h-screen w-full flex justify-center items-center "
           style={{
             background: editModalVisible ? "rgba(0,0,0,0.75)" : "rgba(0,0,0,0)",
           }}

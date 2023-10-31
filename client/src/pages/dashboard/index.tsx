@@ -1,9 +1,14 @@
 import React from "react";
 import { UseAuthContext } from "../auth-provider/auth-provider";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
   const { user } = UseAuthContext();
-  console.log(user);
+  const router = useRouter();
+  if (!user) {
+    router.push("/components/auth/login");
+    return null;
+  }
   return (
     <div className="w-full h-60 flex justify-center items-center">
       <div className="max-w-xl border p-5 flex flex-col justify-center items-center gap-5">

@@ -17,6 +17,7 @@ const categories: CategoriesType[] = [
   { label: "carrier", link: "render/carrier" },
   { label: "business", link: "render/business" },
   { label: "technology", link: "render/technology" },
+  { label: "religious", link: "render/religious" },
 ];
 
 const Categories: React.FC = () => {
@@ -74,8 +75,8 @@ const Categories: React.FC = () => {
         <ul
           className={`${
             showCategory
-              ? "flex flex-col md:flex-row gap-2 w-fit p-5 md:py-0 md:-mx-4 h-fit absolute md:static top-10 z-10 bg-white rounded-lg md:rounded-none"
-              : "hidden md:flex flex-row w-full"
+              ? "flex flex-col md:flex-row gap-2 py-5 md:py-0 h-fit absolute md:static top-10 z-10 bg-white rounded-lg md:rounded-none w-full justify-between"
+              : "hidden md:flex flex-row justify-between w-full"
           }`}
         >
           {categories.slice(0, categories.length).map((item, index) => (

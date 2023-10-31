@@ -21,6 +21,7 @@ interface NewsData {
   reporter: {
     image: string;
     name: string;
+    email: string;
     position: string;
   };
   comments: string[];

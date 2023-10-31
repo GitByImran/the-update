@@ -26,6 +26,8 @@ const EditModal: React.FC<EditModalProps> = ({
     tags: editedItem.news.tags,
   });
 
+  const [isUploading, setIsUploading] = useState(false);
+
   const handleFieldChange = (field: string, value: any) => {
     setEditedFields((prevFields) => ({ ...prevFields, [field]: value }));
   };
@@ -37,6 +39,39 @@ const EditModal: React.FC<EditModalProps> = ({
       ...prevFields,
       tags,
     }));
+  };
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      setIsUploading(true);
+      try {
+        // Upload the file to imgbb
+        const formData = new FormData();
+        formData.append("image", file);
+
+        const response = await fetch(
+          `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMAGE_API}`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        const data = await response.json();
+        const imageUrl = data.data.url;
+
+        setEditedFields((prevFields) => ({
+          ...prevFields,
+          image: imageUrl,
+        }));
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      } finally {
+        setIsUploading(false);
+      }
+    }
   };
 
   const handleSave = () => {
@@ -53,15 +88,17 @@ const EditModal: React.FC<EditModalProps> = ({
         </h2>
         <div className="flex flex-col gap-2">
           <label>
-            <span className="text-lg">Image URL :</span>
+            <span className="text-lg">Image:</span>
             <br />
             <input
-              type="text"
-              placeholder={"previous : " + editedFields.image}
-              onChange={(e) => handleFieldChange("image", e.target.value)}
-              className="px-5 py-2 mt-2 border w-full rounded-md"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="py-2 mt-2 rounded-md"
             />
           </label>
+          {isUploading && <p className="block ml-2">Uploading...</p>}
+
           <label>
             <span className="text-lg">Header :</span>
             <br />

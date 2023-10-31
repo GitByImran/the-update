@@ -4,6 +4,7 @@ import moment from "moment";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import { BiRadioCircleMarked } from "react-icons/bi";
+import Link from "next/link";
 
 interface NewsItem {
   _id: number;
@@ -45,7 +46,7 @@ const SuggestedNews: React.FC = () => {
         const uploadDate = moment(item.reportTime, "MMMM Do YYYY, h:mm:ss a");
         const daysAgo = moment().diff(uploadDate, "days");
 
-        return daysAgo >= 1 && daysAgo <= 3;
+        return daysAgo >= 0 && daysAgo <= 3;
       });
 
       if (filteredNews.length > 0) {
@@ -89,7 +90,7 @@ const SuggestedNews: React.FC = () => {
   return (
     <div>
       <div className="grid grid-cols-12 gap-10">
-        <div className="col-span-8">
+        <div className="col-span-12 md:col-span-8">
           <h2 className="text-2xl font-semibold my-10 border-b-4 border-blue-500 w-fit">
             More News
           </h2>
@@ -108,7 +109,7 @@ const SuggestedNews: React.FC = () => {
                         <hr />
                       </span>
                     </p>
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col items-start gap-3">
                       <div className="h-96 w-full overflow-hidden">
                         <Image
                           src={item.news.image}
@@ -126,13 +127,22 @@ const SuggestedNews: React.FC = () => {
                         <span className="text-blue-500 text-xl">
                           <BiRadioCircleMarked />
                         </span>
-                        Uploaded{" "}
-                        {moment(
-                          item.reportTime,
-                          "MMMM Do YYYY, h:mm:ss a"
-                        ).fromNow(true)}
+                        Uploaded
+                        <span className="mx-.5">
+                          {moment(
+                            item.reportTime,
+                            "MMMM Do YYYY, h:mm:ss a"
+                          ).fromNow(true)}
+                        </span>
                         ago
                       </p>
+                      <Link
+                        href="/news/[newsId]"
+                        as={`/news/${item._id}`}
+                        className="px-5 py-2 text-white bg-blue-500 text-center"
+                      >
+                        Read More
+                      </Link>
                     </div>
                   </div>
                 ));
@@ -145,7 +155,7 @@ const SuggestedNews: React.FC = () => {
             <div ref={inViewRef}></div>
           </div>
         </div>
-        <div className="col-span-4">
+        <div className="col-span-12 md:col-span-4">
           <div className="flex flex-col gap-10">
             <h2 className="text-2xl font-semibold my-10 border-b-4 border-blue-500 w-fit">
               Latest News Today
@@ -161,19 +171,29 @@ const SuggestedNews: React.FC = () => {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <div className="flex flex-col gap-1 my-5">
-                  <h2>{item.news.header}</h2>
+                <div className="flex flex-col items-start gap-1 my-5">
+                  <h2 className="font-bold">{item.news.header}</h2>
                   <p className="truncate">{item.news.body}</p>
                   <p className="text-gray-500 flex items-center gap-1">
                     <span className="text-blue-500 text-xl">
                       <BiRadioCircleMarked />
                     </span>
-                    Uploaded{" "}
-                    {moment(item.reportTime, "MMMM Do YYYY, h:mm:ss a").fromNow(
-                      true
-                    )}
+                    Uploaded
+                    <span className="mx-1">
+                      {moment(
+                        item.reportTime,
+                        "MMMM Do YYYY, h:mm:ss a"
+                      ).fromNow(true)}
+                    </span>
                     ago
                   </p>
+                  <Link
+                    href="/news/[newsId]"
+                    as={`/news/${item._id}`}
+                    className="px-5 py-2 mt-2 text-white bg-blue-500 text-center"
+                  >
+                    Read More
+                  </Link>
                 </div>
               </div>
             ))}

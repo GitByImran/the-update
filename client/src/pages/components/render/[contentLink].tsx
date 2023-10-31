@@ -37,7 +37,10 @@ const ContentRender: React.FC = () => {
       ) : (
         <div className="flex flex-col gap-10 my-10 px-5 md:px-5">
           {filteredNews.map((item, index) => (
-            <div key={index} className="flex flex-col md:flex-row gap-10">
+            <div
+              key={index}
+              className="flex flex-col md:flex-row gap-10 border rounded-lg overflow-hidden md:overflow-visible md:rounded-none md:border-none"
+            >
               <div className="h-60 fill md:w-96 overflow-hidden md:basis-2/6 basis-6/6">
                 <Image
                   src={item.news.image}
@@ -47,7 +50,7 @@ const ContentRender: React.FC = () => {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="md:basis-4/6 basis-6/6">
+              <div className="md:basis-4/6 basis-6/6 px-5 md:px-0 md:pb-0 pb-10">
                 <h2 className="text-2xl font-semibold text-blue-500">
                   {item.news.header}
                 </h2>

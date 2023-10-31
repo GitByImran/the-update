@@ -51,8 +51,8 @@ const InternationalNews: React.FC = () => {
       <h2 className="text-2xl font-semibold my-10 border-b-4 border-blue-500 w-fit">
         Latest International News
       </h2>
-      <main className="flex items-center justify-between gap-10">
-        <div className="basis-1/2">
+      <main className="flex md:flex-row flex-col-reverse items-center justify-between gap-10">
+        <div className="md:basis-1/2">
           <h2 className="text-2xl font-semibold text-blue-500">
             {latestInternationalNews.news.header}
           </h2>

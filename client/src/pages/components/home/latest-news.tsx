@@ -37,7 +37,7 @@ const LatestNews: React.FC = () => {
       <div className="grid grid-cols-12 gap-5">
         {latestNews.slice(0, 3).map((item, index) => (
           <div
-            className="col-span-4 bg-white p-5 border -mt-20 z-10"
+            className="col-span-12 md:col-span-4 bg-white p-5 border mb-20 md:mb-0 -mt-20 z-10"
             key={item._id}
           >
             <p className="mb-5 flex items-center gap-1">

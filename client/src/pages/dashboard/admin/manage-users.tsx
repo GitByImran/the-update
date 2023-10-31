@@ -1,22 +1,29 @@
 import { UseAuthContext } from "@/pages/auth-provider/auth-provider";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useNewsContext } from "@/pages/news-provider/news-provider";
 
 interface UserData {
   name: string;
   email: string;
   image: string;
   role: string;
-  totalReport: number;
   _id: string;
 }
 
 const ManageUsers = () => {
   const { userList, refetchUserData } = UseAuthContext();
+  const { data: newsData } = useNewsContext();
   const availableRoles = ["user", "admin", "editor", "moderator"];
-  console.log(userList);
+
+  const getAllReport = (email: string) => {
+    const userReports = newsData.filter(
+      (news) => news.reporter.email === email
+    );
+    return userReports.length;
+  };
 
   const getAvailableRoles = (user: any) => {
     return availableRoles.filter((role) => role !== user.role);
@@ -63,12 +70,12 @@ const ManageUsers = () => {
         <div className="grid grid-cols-12 gap-10 my-10">
           {userList?.map((data, index) => (
             <div
-              className="border col-span-12 sm:col-span-6 lg:col-span-4 px-5 mb-10 lg:mb-0"
+              className="border col-span-12 sm:col-span-6 lg:col-span-4 px-5 mb-10 lg:mb-10"
               key={index}
             >
-              <div className="h-20 w-20 rounded-full overflow-hidden z-10 -mt-10">
+              <div className="h-20 w-20 rounded-full bg-white overflow-hidden z-10 -mt-10">
                 <Image
-                  src={data.image}
+                  src={data.image ? data.image : "/dummy.jpg"}
                   alt="User Profile"
                   width={500}
                   height={500}
@@ -86,7 +93,7 @@ const ManageUsers = () => {
                   Current Role: {data.role}
                 </p>
                 <p className="text-gray-700 font-semibold">
-                  Total reports : {data.totalReport}
+                  Total reports: {getAllReport(data.email)}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2 mb-5">

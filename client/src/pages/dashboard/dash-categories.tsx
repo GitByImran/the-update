@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
+import { UseAuthContext } from "../auth-provider/auth-provider";
 
 interface CategoriesType {
   label: string;
@@ -18,7 +19,22 @@ const categories: CategoriesType[] = [
 const DashCategories: React.FC = () => {
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [activeCategory, setActiveCategory] = useState("");
+  const [userRole, setUserRole] = useState("");
+  const { user, userList } = UseAuthContext();
   const router = useRouter();
+
+  useEffect(() => {
+    const getUserRole = userList?.find(
+      (userData) => userData.email === user?.email
+    );
+
+    setUserRole(getUserRole ? getUserRole.role : "");
+  }, [user, userList]);
+
+  const filteredCategories = categories.filter((category) => {
+    // Filter out "manage-users" if the user is not an admin
+    return category.label !== "manage-users" || userRole === "admin";
+  });
 
   const handleToggle = () => {
     setShowCategory(!showCategory);
@@ -72,7 +88,7 @@ const DashCategories: React.FC = () => {
               : "hidden md:flex flex-row w-full"
           }`}
         >
-          {categories.slice(0, categories.length).map((item, index) => (
+          {filteredCategories.slice(0, categories.length).map((item, index) => (
             <li key={index} onClick={handleHidecategory}>
               <Link
                 className={`capitalize text-lg hover:bg-blue-500 rounded hover:text-white px-5 hover:py-2 ${

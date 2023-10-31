@@ -25,17 +25,26 @@ enum ActiveView {
 
 const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
   const [activeView, setActiveView] = useState<ActiveView>(ActiveView.Home);
-  const { user, handleSignOut } = UseAuthContext();
+  const { user, handleSignOut, userList } = UseAuthContext();
   const [showRoute, setShowRoute] = useState<boolean>(false);
+  const [userRole, setUserRole] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const getUserRole = userList?.find(
+      (userData) => userData.email === user?.email
+    );
+
+    setUserRole(getUserRole ? getUserRole.role : "");
+  }, [user, userList]);
 
   const [currentTime, setCurrentTime] = useState(
     moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
   );
   useEffect(() => {
-    const currentPath = router.asPath;
+    const currentPath = router.pathname;
 
-    if (currentPath === "/components/render") {
+    if (currentPath === "/components/render" || currentPath === "/") {
       setActiveView(ActiveView.Home);
     } else if (currentPath.includes("/dashboard")) {
       setActiveView(ActiveView.Dashboard);
@@ -112,22 +121,24 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
                 </span>
                 Home
               </Link>
-              <Link
-                href="/dashboard"
-                className={`text-lg flex items-center gap-2 py-1 hover:border-b-4 hover:border-blue-500 ${
-                  activeView === ActiveView.Dashboard
-                    ? showRoute
-                      ? "border-b-2 border-white w-fit"
-                      : "border-b-4 border-blue-500"
-                    : ""
-                }`}
-                onClick={() => handleViewChange(ActiveView.Dashboard)}
-              >
-                <span className="mt-1">
-                  <RxDashboard />
-                </span>
-                Dashboard
-              </Link>
+              {["admin", "editor", "moderator"].includes(userRole) && (
+                <Link
+                  href="/dashboard"
+                  className={`text-lg flex items-center gap-2 py-1 hover:border-b-4 hover:border-blue-500 ${
+                    activeView === ActiveView.Dashboard
+                      ? showRoute
+                        ? "border-b-2 border-white w-fit"
+                        : "border-b-4 border-blue-500"
+                      : ""
+                  }`}
+                  onClick={() => handleViewChange(ActiveView.Dashboard)}
+                >
+                  <span className="mt-1">
+                    <RxDashboard />
+                  </span>
+                  Dashboard
+                </Link>
+              )}
               {user ? (
                 <button
                   onClick={handleSignOut}
